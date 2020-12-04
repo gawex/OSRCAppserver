@@ -51,8 +51,8 @@ class AppserverPresenter extends Nette\Application\UI\Presenter
                     }
                     $payload = Json::encode($records, Json::PRETTY);
                     break;    
-                case 'insertRandomTemperature':
-                    $payload = $this->databaseModel->insertRandomTemperature();
+                case 'insertRandomTemperatureAndHumidity':
+                    $payload = $this->databaseModel->insertRandomTemperatureAndHumidity();
                     break;
                 default:
                     $payload = 'DEFAULT APP SERVER HANDLE DATABASE: COMMAND IS NULL!!!';
