@@ -34,14 +34,17 @@ class DatabaseModel
             return $records;
         }
         
-        public function insertRandomTemperature(){
+        public function insertRandomTemperatureAndHumidity(){
             $temp = rand(-10000, 10000);
             $temp /= 100;
+            $humi = rand(0, 10000);
+            $humi /= 100;
             $this->database->table('data')->insert([
 		'da_temperature' => $temp,
+                'da_humidity' => $humi
                 ]);
-            $row = $this->database->fetch('SELECT da_temperature, da_timestamp FROM data ORDER BY data.da_timestamp DESC LIMIT 1');
-            return 'V ' . $row->da_timestamp->format('H:i:s d. m. Y') . ' byla do databáze vložena nová hodnota teploty: ' . $row->da_temperature . ' °C';
+            $row = $this->database->fetch('SELECT da_temperature, da_humidity, da_timestamp FROM data ORDER BY data.da_timestamp DESC LIMIT 1');
+            return 'V ' . $row->da_timestamp->format('H:i:s d. m. Y') . ' byla do databáze vložena nová hodnota teploty: ' . $row->da_temperature . ' °C a nová hodnota relativní vlhkosti ' . $row->da_humidity . ' %.';
         }
         
 }
